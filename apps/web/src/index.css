@@ -1,0 +1,238 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+/* Layar dengan tinggi cukup (≥ 640px), dipakai untuk memperbesar elemen tanpa memicu scroll. */
+@custom-variant tall (@media (min-height: 40rem));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: "Geist Variable", sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  color-scheme: light;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.148 0.004 228.8);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.148 0.004 228.8);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.148 0.004 228.8);
+  --primary: #e6000b;
+  --primary-foreground: oklch(0.971 0.013 17.38);
+  --secondary: oklch(0.967 0.001 286.375);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.963 0.002 197.1);
+  --muted-foreground: oklch(0.56 0.021 213.5);
+  --accent: oklch(0.963 0.002 197.1);
+  --accent-foreground: oklch(0.218 0.008 223.9);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.925 0.005 214.3);
+  --input: oklch(0.925 0.005 214.3);
+  --ring: oklch(0.723 0.014 214.4);
+  --chart-1: oklch(0.81 0.117 11.638);
+  --chart-2: oklch(0.645 0.246 16.439);
+  --chart-3: oklch(0.586 0.253 17.585);
+  --chart-4: oklch(0.514 0.222 16.935);
+  --chart-5: oklch(0.455 0.188 13.697);
+  --radius: 0.875rem;
+  --sidebar: oklch(0.987 0.002 197.1);
+  --sidebar-foreground: oklch(0.148 0.004 228.8);
+  --sidebar-primary: #e6000b;
+  --sidebar-primary-foreground: oklch(0.971 0.013 17.38);
+  --sidebar-accent: oklch(0.963 0.002 197.1);
+  --sidebar-accent-foreground: oklch(0.218 0.008 223.9);
+  --sidebar-border: oklch(0.925 0.005 214.3);
+  --sidebar-ring: oklch(0.723 0.014 214.4);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  html {
+    @apply font-sans;
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  body {
+    -ms-overflow-style: none;
+  }
+}
+
+/* Sparta Office: token tambahan di atas tema portal Sparta. */
+@theme inline {
+  --color-working: var(--working);
+  --color-wall: var(--wall);
+}
+
+:root {
+  /* Status "bekerja". #a15c07 di atas putih 5,2:1, lolos AA untuk teks kecil. */
+  --working: #a15c07;
+  /* Garis dinding denah. Sengaja gelap supaya terbaca seperti gambar kerja. */
+  --wall: oklch(0.32 0.01 228);
+}
+
+/* Perbaikan kontras (antislop R-25). Token portal menghasilkan:
+   - primary-foreground di atas primary 4,39:1, sekarang putih 4,81:1
+   - muted-foreground di atas muted 4,14:1, sekarang 4,9:1 lebih */
+:root {
+  --primary-foreground: #ffffff;
+  --sidebar-primary-foreground: #ffffff;
+  --muted-foreground: oklch(0.5 0.021 213.5);
+}
+
+/* Status "perlu review kamu". Di tema terang sama dengan merah Sparta;
+   di ruang kontrol gelap dibuat lebih terang supaya teks kecil tetap AA. */
+@theme inline {
+  --color-review: var(--review);
+}
+:root {
+  --review: var(--primary);
+}
+
+/* Tema ruang kontrol untuk SELURUH Sparta Office (keputusan user setelah
+   tahap 3: pindah halaman terang-gelap terasa seperti pindah aplikasi).
+   Dipasang di <html> supaya dialog, menu, dan toast di portal ikut gelap.
+   Latar biru malam seperti kertas gambar kerja, bukan hitam pekat. Aksen
+   tetap merah Sparta. */
+.ruang-kontrol {
+  color-scheme: dark;
+  --background: #0f1922;
+  --foreground: #e8edf2;
+  --card: #152230;
+  --card-foreground: #e8edf2;
+  --popover: #152230;
+  --popover-foreground: #e8edf2;
+  --secondary: #1d2d3d;
+  --secondary-foreground: #e8edf2;
+  --muted: #1d2d3d;
+  --muted-foreground: #a3b1be;
+  --accent: #1d2d3d;
+  --accent-foreground: #e8edf2;
+  --border: #2b3b4b;
+  --input: #2b3b4b;
+  --ring: #6b7d8f;
+  --working: #f2a93b;
+  --review: #ff6b73;
+  --wall: #2b3b4b;
+  /* Merah error dibuat lebih terang supaya teks error tetap AA di latar gelap. */
+  --destructive: #ff6b73;
+  --sidebar: #132029;
+  --sidebar-foreground: #e8edf2;
+  --sidebar-border: #2b3b4b;
+  --sidebar-accent: #1d2d3d;
+  --sidebar-accent-foreground: #e8edf2;
+}
+.ruang-kontrol body {
+  background: var(--background);
+}
+
+/* Label di ruang kontrol 3D (dirender CSS2DRenderer di atas kanvas). */
+.kantor-room-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a3b1be;
+  white-space: nowrap;
+}
+.kantor-robot-label {
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  background: rgb(15 25 34 / 0.85);
+  border: 1px solid #2b3b4b;
+  color: #e8edf2;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.kantor-robot-label[data-selected="true"] {
+  border-color: #e6000b;
+}
+/* Robot yang belum aktif tidak diberi label kecuali sedang dipilih; namanya
+   tetap ada di daftar agent. Ini mencegah label di Lab Developer bertumpuk. */
+.kantor-robot-label[data-status="nonaktif"]:not([data-selected="true"]) {
+  display: none;
+}
+/* Di layar sempit hanya nama robot terpilih yang tampil, supaya tidak menumpuk. */
+[data-narrow="true"] .kantor-room-label,
+[data-narrow="true"] .kantor-robot-label:not([data-selected="true"]) {
+  display: none;
+}
+
+/* Gelembung bicara robot. Isinya dari kejadian asli di Percakapan Kantor. */
+.kantor-bubble {
+  max-width: 13rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.75rem;
+  border: 1px solid #2b3b4b;
+  background: rgb(21 34 48 / 0.95);
+  color: #e8edf2;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  white-space: normal;
+  transition: opacity 200ms ease;
+}
+.kantor-bubble[data-show="false"] {
+  opacity: 0;
+}
+.kantor-bubble[data-kind="tugas"] {
+  border-color: #e6000b;
+}
+.kantor-bubble[data-kind="langkah"] {
+  color: #a3b1be;
+}
+@media (prefers-reduced-motion: reduce) {
+  .kantor-bubble {
+    transition: none;
+  }
+}
